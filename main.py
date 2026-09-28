@@ -1,4 +1,6 @@
 from fastapi import FastAPI
+from fastapi.responses import RedirectResponse
+
 from routers.student_routers import router as student_router
 
 app = FastAPI(
@@ -9,8 +11,7 @@ app = FastAPI(
 
 app.include_router(student_router)
 
+
 @app.get("/", tags=["Root"])
 def root():
-    return {
-        "message": "Student CRUD API is running successfully. Navigate to /docs for interactive Swagger UI."
-    }
+    return RedirectResponse(url="/docs")
